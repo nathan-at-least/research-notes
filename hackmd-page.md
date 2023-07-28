@@ -1,0 +1,257 @@
+# Nate's Research Log
+
+Hello, I primarily track this for my own use. I keep it public in case it helps others and to provide accountability around my personal research efforts.
+
+**2022-11-08:** Note that my focus at [ECC](https://electriccoin.co) has shifted away from protocol research towards addressing acute private payment UX & performance engineering issues. See [Update: Addressing Zcash wallet performance issues](https://electriccoin.co/blog/update-addressing-zcash-wallet-performance-issues/).
+
+## To Read
+
+- [A Deep Dive on RSA Accumulators](https://medium.com/good-audience/deep-dive-on-rsa-accumulators-230bc84144d9)
+    - **Why?** Learn their application to Zcash nullifier scalability.
+- **2023-05-25** conversation with Zooko on "Multi-spend protection".
+    - PoS provides `$X` protection, but double spend (`n=2`) isn't safe enough, because what if `n>>2`?
+    - PoW doesn't protect against this.
+    - bond + PoW block protects against this.
+    - PoW attack cost scales with number of recipients due to multi-spend exclusion rules per block.
+    - bond scales w/ size of transfer.
+    - What about the tie-in w/ ebb-and-flow restart resilience? Does that restart schelling point impede social slashing?
+    - Can we get benefits of verifiable cost by burning stake rather than temporarily locking it?
+- [A16Z Crypto research publications](https://a16zcrypto.com/research/)
+- [Size Matters, by Awa Sun Yin](https://blog.namada.net/size-matters/)
+    - **Why?** Understand Anoma's perspective on privacy.
+- [Tiered Mechanisms for Blockchain Transaction Fees, by
+Kiayias, Koutsoupias, Lazos, and Panagiotakos](https://arxiv.org/pdf/2304.06014.pdf)
+    - **Why?** Designing a good fee system can greatly improve Zcash UX facilitating adoption for payments.
+- [Experiments in DAO Governance, by Derek Hsue & Linda Xie](https://www.reverie.ooo/post/experiments-in-dao-governance)
+    - **Why?** I personally want to see Zcash governance "level up" consistently every year or two, and there's a lot to learn from across the DAO ecosystem. These authors fill an incredibly important beat with practical hands-on experience.
+- A [@trent_vanepps thread](https://twitter.com/trent_vanepps/status/1640424828061532199?s=20) about mechanism design survey research.
+    - **Why?** Keeping abreast of mechanism design becomes more and more important the more complexity and programmability gets deployed to Zcash. If we stay up on this area _before_ the protocol grows more complex, we can avoid pitfalls and produce more solid protocol updates.
+- Celestia tech docs; starting point: https://celestia.org/technology/
+    - **Why?** For potential Zcash protocol upgrades, we should do a comprehensive survey of existing building blocks to save effort and minimize "novel design" risks. -and of course, track the trade-offs and risks of any pre-existing building block carefully.
+- Ethereum Roadmap: [Statelessness, state expiry and history expiry](https://ethereum.org/en/roadmap/statelessness/)
+    - **Why?** To understand Zcash scalability improvement possibilities better.
+- Lightning privacy refs via [this @DavidVorick tweet](https://twitter.com/DavidVorick/status/1635623849692655616):
+    - Rationale: may be relevant for [Zcash Modular Scalable Payments Architecture](https://nathan-at-least.github.io/zcash-mspa-book/) project:
+    - https://en.cryptonomist.ch/2021/11/06/lightning-network-privacy-really-that-private/
+    - https://arxiv.org/pdf/2003.12470.pdf
+    - https://eprint.iacr.org/2020/303.pdf
+    - https://eprint.iacr.org/2019/328.pdf
+- Cosmos/Gaia [Interchain Security](https://github.com/cosmos/gaia/blob/main/docs/interchain-security.md) specification.
+    - [my twitter linkage](https://twitter.com/nate_zec/status/1631727811659730946)
+- This newer replacement for one of the annotated Ethereum specs looks excellent at first glance: https://eth2book.info/bellatrix/
+    - I specifically am most interested in https://eth2book.info/bellatrix/part2/incentives/issuance right now.
+- https://vitalik.ca/general/2017/12/31/pos_faq.html
+- https://arxiv.org/abs/1811.00742 (via https://github.com/ethereum/consensus-specs/issues/832)
+- https://eprint.iacr.org/2018/1105.pdf via https://twitter.com/gr1zw0ld/status/1511017404163309578
+- [Vitalik on Discouragement Attacks](https://github.com/ethereum/research/blob/master/papers/discouragement/discouragement.pdf) via annotated Eth2 spec (below)
+    - and [Barnabe's Summary](https://hackingresear.ch/discouragement-attacks/)
+- [Serenity Design Rationale](https://notes.ethereum.org/@vbuterin/serenity_design_rationale)
+- [Cosmos Validator Economics — Bridging the Economic System of Old into the New Age of Blockchains](https://blog.cosmos.network/economics-of-proof-of-stake-bridging-the-economic-system-of-old-into-the-new-age-of-blockchains-3f17824e91db)
+- [ETH2 economic model spreadsheet](https://docs.google.com/spreadsheets/d/1y18MoYSBLlHZ-ueN9m0a-JpC6tYjqDtpISJ6_WdicdE/edit#gid=1146360926)
+- [On Stake and Consensus - Andrew Poelstra](https://download.wpsoftware.net/bitcoin/pos.pdf)
+- [Oblivious Message Retrieval - Zeyu Liu and Eran Tromer](https://eprint.iacr.org/2021/1256)
+- [MEV and Me - Charlie Noyes, Paradigm Research](https://research.paradigm.xyz/MEV)
+- [Why buy when you can rent?
+Bribery attacks on Bitcoin-style consensus
+Joseph Bonneau](https://jbonneau.com/doc/B16a-BITCOIN-why_buy_when_you_can_rent.pdf)
+- [Validator Economics of Ethereum 2.0 — Part One](https://tokeneconomy.co/validator-economics-of-ethereum-2-0-part-one-bc188173cdca)
+- [Three Attacks on Proof-of-Stake Ethereum - Caspar Schwarz-Schilling, Joachim Neu, Barnabé Monnot, Aditya Asgaonkar, Ertem Nusret Tas, David Tse](https://arxiv.org/pdf/2110.10086)
+- [Gasper High Confidence Fast Block confirmations - Dankrad Feist
+Ethereum Foundation (Eth2.0 Research)](https://docs.google.com/presentation/d/1MUVaFyd9ce3hPQ5L-UhqVSfxf1ajMYFbkActkp5xNKI/edit#slide=id.gf55e72f86f_0_99)
+    - via [this tweet from @TimBeiko](https://twitter.com/TimBeiko/status/1499869190005477381)
+        - via [this tweet from @barnabemonnot in reply to my questions](https://twitter.com/barnabemonnot/status/1529949736148639744)
+- https://arxiv.org/abs/2208.05408 via Steven Smith
+- via [this `@tarunchitra` tweet](https://twitter.com/tarunchitra/status/1318675575872102406):
+    - [LMD-Ghost paper](https://arxiv.org/abs/2009.04987)
+    - [Nakamoto wins](https://arxiv.org/abs/2005.10484)
+    - [PoS + dynamic availability](https://arxiv.org/abs/2010.08154)
+- [The Knowledge Complexity of Interactive Proof Systems, Goldwasser, Micali, Rackoff](https://people.csail.mit.edu/silvio/Selected%20Scientific%20Papers/Proof%20Systems/The_Knowledge_Complexity_Of_Interactive_Proof_Systems.pdf)
+    - **Why?** This is the research basis of ZKP applications, and may be useful for improving my broad contextual understanding.
+
+## Log
+
+Entries are reverse-chronologically date-stamped by when I last touched that reference, so when I review or dig in further on a reference it bumps up to the top.
+
+- **2023-07-28** [Batching Techniques for Accumulators with Applications to IOPs and Stateless Blockchains, Dan Boneh, Benedikt Bünz, and Ben Fisch](https://eprint.iacr.org/2018/1188)
+    - **Why?** To understand this buliding block for potential application in scaling Zcash nullifier bottleneck.
+    - **Notes:**
+        - 
+- **2023-07-26** [Long-range Attacks on Proof-of-Stake (PoS) Blockchains w/ Valeria Nikolaenko | a16z crypto research](https://www.youtube.com/watch?v=-uxHoEfxXC4)
+    - **Why?** To understand PoS security around long range attacks.
+    - **Epistemic Status:** a single watch-through.
+    - **Notes:**
+        - In *Winkle* transactions attest to blockchain history. Zcash shielded transactions attest to anchors, which are scoped to blocks, so there is a natural dovetail.
+        - Vote weight is based on account size. In Zcash this is unknown.
+        - A commentor brought up the notion of weighting user-votes by transaction fee. This seems appealing for a few reasons:
+            - Fees are public in Zcash.
+            - With something like EIP-1559, "backdoors" where block producers can signal fees with no real cost are removed.
+            - However, on a false fork, an attacker could generate many transaction fees… -and we can't tell about the distribution of sender identities in shielded Zcash.
+         - Insight: who cares about long-range attacks?
+             - It is *specifically* a node coming online (for the first time, or after some period) who learns of a chain and needs to know "is this the canonical legitimate chain".
+             - In many cases it may be *a user receiving a payment*. If we assume the payer is on the legitimate chain, can they signal that "legit" chain identity? Does this also open attacks from malicious senders?
+- **2023-07-26** [A Survey of Proof-of-Stake (PoS) Blockchain Designs with Valeria Nikolaenko | a16z crypto research](https://www.youtube.com/watch?v=mZ-Ya7NRDxM)
+    - **Why?** To understand PoS design space.
+    - **Epistemic Status:** a single watch-through w/out notes
+    - **Next Steps:** Watch again and take notes relevant to Zcash.
+- **2023-03-03** [Eigenlayer Whitepaper](https://www.v1.eigenlayer.xyz/whitepaper.pdf)
+    - **Why?** To understand the design space of *extensible* PoS protocols and what is required for the extensibility.
+    - **Epistemic Status:** Once-over read-through.
+    - **Next Steps:**
+        - Compare Ethereum + Eigenlayer to Cosmos/Gaia Interchain Security.
+- **2022-11-09** [Resource Pools and the CAP Theorem](https://arxiv.org/abs/2006.10698)
+    - **Why?** To understand how PoS connects to the CAP theorem in order to understand the availability-vs-finality trade-off.
+    - **Epistemic Status:** Skimmed the first few pages.
+    - **Next Steps:**
+        - This one seems important for understanding a key property of dynamically available protocols like PoW, where no one even knows how many "outside miners" might show up at any moment. Intuitively this seems like a good feature for resilience.
+        - This came up on [this twitter thread](https://twitter.com/nate_zec/status/1590507440722018307) in the context of rostered-vs-rosterless protocols, which may be an important resiliency trade-off.
+- **2022-05-31** [twitter thread by `@toghrulmaharram` on why ETH2 stake is 32 ETH](https://twitter.com/toghrulmaharram/status/1530708903440302082)
+    - **Why?** To understand the trade-offs between consensus overhead and stake size for Eth2.
+    - **Epistemic Status:** complete
+    - **Notes:** HT to [`@roommatemusing`](https://twitter.com/roommatemusing/status/1530715587839545344) for the lead.
+- **2022-05-26** [Brewers Conjecture and a characterization of the limits, and relationships between Consistency, Availability and Partition Tolerance in a distributed service - Amrith Kumar, Kenneth Rugg](https://arxiv.org/abs/1904.12636)
+    - **Why?** To refresh my understanding of the CAP theorem, which is a basis for later crypto-consensus protocol research.
+    - **Epistemic Status:** Completed.
+    - 
+- **2022-05-26** [On Staking Pools and Staking Derivatives](https://research.paradigm.xyz/staking)
+    - **Why?** To understand the trade-offs of introducing staking derivatives into a protocol.
+    - **Epistemic Status:** Completed.
+    - **Notes:**
+        - One of the benefits of decentralized staking is more efficient MEV capture which does not apply to Zcash in the medium-term (assuming no programmability/MEV).
+        - I read over the argument that derivatives can increase security of PoS, but I still feel cautious and need to ponder and research this area further.
+- **2022-04-28** [Competitive equilibria between staking and on-chain lending - Tarun Chitra](https://arxiv.org/abs/2001.00919)
+    - **Why?** Understand when PoS is safe in varying economic conditions, even if the "compsci security" is solid.
+    -  **Epistemic Status:** Part way through.
+    -  **Notes:**
+        -  §3.1
+            -  $S_t = \zeta_t + \ell_t$
+                - What about (a) tokens neither staked nor lent, and (b) borrowed tokens?
+                - Borrowed tokens could be further lent or staked, so this seems significant. Note, §3.2.2 models borrowed funds but Assumption 9 seems to suggest they are not lent nor staked.
+        - §3.2.2 Three-State Model
+            - **Assumption 9:** This seems to imply borrowed tokens are neither staked nor lent. Is that correct?
+            - Intuition: if borrowing rate is lower than staking rate, why not borrow and stake?
+        - §3.3
+            - **Assumption 10:** Is this directly related to assuming no MEV?
+        - §3.3 <- Fixme.
+            - Slashing is modeled, but not failure risks of the lending protocol. What if the lending protocol is modeled to have some kind of failure risk? If we think of it as an aggregate of all on-chain lending systems, this might approximate capital being spread across smart contracts, some of which occasionally explode in token-melting disasters.
+- **2022-04-12** - [Ethereum 2.0 Economic Review by Hoban & Borgers](https://drive.google.com/file/d/1pwt-EdnjhDLc_Mi2ydHus0_Cm14rs1Aq/view)
+    - **Why?** Understand how issuance rates and PoS security interact in the ETH2 design.
+    - **Epistemic Status:**
+        - Section 5: read (skimmed over deployment types)
+        - Section 9: Economic Attack Vectors
+            - This is the good stuff.
+            - > […] sampling from a large enough validator set (at least the 16,384 validators required for the beacon chain launch)
+                - Note validator threshold req, not sure yet where it comes from.
+            - Supermajority attack: they estimate cost of acquiring enough ETH, then compare that to the cost of acquiring equivalent hashing power for ETH1. This seems like the primary model driving a "minimum amount staked" security metric goal.
+            - Finality attacks:
+                - Simplest attack is DoS by taking $\frac{1}{3}+\epsilon$ validators offline.
+                - **Bookmark: I haven't finished reading this section.**
+        - Section 10: 
+            - > The cost of attack of the Beacon chain must be equal to or greater than the economic gain derived from the attack.
+                - Uh oh: how can we know w/ guarantee the economic gain of an attack?
+- **2022-04-04** [github/ethereum/anotated-spec](https://github.com/ethereum/annotated-spec/blob/master/phase0/beacon-chain.md)
+    - **Why?** To understand the specification of Eth2 issuance (and other cryptoecon design params) on my way to understanding the rationale.
+    - **Epistemic Status:** Jumping to every section titled "Rewards and Penalties"
+    - **Notes:**
+        - From [Phase 0 Beacon Chain - Rewards and Penalties](https://github.com/ethereum/annotated-spec/blob/master/phase0/beacon-chain.md#rewards-and-penalties-1)
+            - > We don't want validators that cannot meet that minimum level of liveness, as such validators would hurt more than they help by hindering finality (which requires 2/3 online).
+                - Note requirement for 2/3 of validators for 'liveness'.
+            - > This rule that your rewards decrease if other validators do less well was included to disincentivize harming other validators; see my writing on discouragement attacks (and Barnabe's summary) for reasoning why this is a good idea.
+                - Refs:
+                    - [Vitalik on Discouragement Attacks](https://github.com/ethereum/research/blob/master/papers/discouragement/discouragement.pdf)
+                    - [Barnabe's Summary](https://hackingresear.ch/discouragement-attacks/)
+        - Tabling this to seek out a higher-level design description. Maybe [Serenity Design Rationale](https://notes.ethereum.org/@vbuterin/serenity_design_rationale)?
+- **2022-04-05** [Annotated ETH2 Spec: Rewards and Penalties](https://benjaminion.xyz/eth2-annotated-spec/phase0/beacon-chain/#rewards-and-penalties)
+    - **Why?** To understand the Ethereum issuance specification on the path towards understanding the rationale around issuance.
+    - **Epistemic Status:** switching to [github/ethereum/anotated-spec](https://github.com/ethereum/annotated-spec/blob/master/phase0/beacon-chain.md#rewards-and-penalties=) so that I can submit PRs, even though this one has more explanation.
+- **2022-03-31** [ethhub.io: Monetary Policy](https://docs.ethhub.io/ethereum-basics/monetary-policy/)
+    - **Why?** Understand design rationale for issuance rate in Ethereum.
+    - **Epistemic Status:** Read.
+    - **Next Steps:** Read the ETH2 spec.
+    - **Notes:**
+        - There is no rationale for how the issuance rate is set other than "the minimum possible for security". There is no explanation of how that is calculated.
+        - There's a good chart of historic and projected issuance vs supply (although it's outdated and shows ETH2 merge happening in 2021).
+- **2022-03-04** [Synchrony, Asynchrony and Partial synchrony](https://decentralizedthoughts.github.io/2019-06-01-2019-5-31-models/)
+    - **Why?** Understand synchrony models used in distributed computing / blockchain security papers.
+    - **Epistemic Status:** Finished.
+    - **Notes:**
+        -  It seems like "partial asynchrony" is the most useful/common these days.
+        -  My understanding of partial asynchrony is that it attempts to capture cases where an attacker can disrupt network access for an arbitrary period of time, but so long as the targeted nodes reconnect, then after some time, they will recover a correct/safe network view.
+        -  It's not clear to me if this abstraction helps analyze when a specific subset of the network is disrupted or only "the entire network".
+- **2022-03-34** [Ebb-and-Flow Protocols: A Resolution of the Availability-Finality Dilemma](https://arxiv.org/abs/2009.04987)
+    - **Why?** To gain a better understanding of PoS protocol security.
+    - **Epistemic Status:** Started the paper, and decided to table it in favor of researching fast-finality with no support for dynamically available clients.
+    - **Next Steps:**
+        - Switch to [Resource Pools and the CAP Theorem](https://arxiv.org/abs/2006.10698) (above).
+        - Finish the paper and document ebb-and-flow as a Zcash candidate protocol feature. (Note: my preferred tech strategy would be to adopt a "standard" consensus, like Tendermint, then later work with that community to develop ebb-and-flow.)
+        - 
+- **2022-03-24** [What is Money, Anyway?](https://www.lynalden.com/what-is-money/)
+    - **Why?** Understand economic hypotheses around cryptocurrency value.
+    - **Epistemic Status:** Completed the article, posted a [response thread](https://twitter.com/least_nathan/status/1503446802380468227).
+    - **Next Steps:** Read Lyn Alden article [Proof-of-Stake and Stablecoins: A Blockchain Centralization Dilemma](https://www.lynalden.com/proof-of-stake/).
+- **2022-02-01** [@vbuterin Serenity Design Rationale: Base Rewards](https://notes.ethereum.org/@vbuterin/serenity_design_rationale#Base-rewards)
+    - **Why?** Study design space of issuance in PoS.
+    - **Epistemic Status:** Read
+    - **Notes:** Two common extremes: fixed reward rate vs fixed total reward
+- [A big gap where I stopped updating this.] :-(
+- **2021-11-18** Draft GMU Economic Paper on ZSAs
+    - **Why?** This is research ECC commissioned to model different ZSA fee mechanisms economically, which is directly relevant to protocol feature planning.
+    - **Epistemic Status:** First read through intro sections.
+    - **Next Steps:** Take detailed notes on a read-through.
+- **2021-10-14** [The Cosmos SDK Documentation](https://docs.cosmos.network/master/)
+    - **Why?** The Cosmos SDK platform is an appealing candidate for implementing a Proof-of-Stake protocol and integrating IBC.
+    - **Epistemic Status:** Not started.
+    - **Reactions:** ...
+    - **Next Steps:** Read it.
+- **2021-08-31** [The Rainbow Network](https://research.paradigm.xyz/RainbowNetwork.pdf)
+    - **Why?** This sounds like a powerful crypto-financial primitive that would enable many important use cases, and it can do so all based on a single base asset on-chain.
+    - **Epistemic Status:** I've only read the abstract.
+    - **Reactions:** Abstract is super exciting and Dan Robinson is legend.
+    - **Next Steps:** Read it.
+- **2021-08-22** [Sapio EDSL guide](https://learn.sapio-lang.org/) and the [Sapio EDSL framework](https://github.com/sapio-lang/sapio) - used to construct bitcoin contracts relying on OP_CHECKTEMPLATEVERIFY
+    - **Why?** Explore UTXO-based contract expressiveness design space.
+    - **Epistemic Status:** Workshop sessions at [pleb.fi Austin](https://pleb.fi/austin/)
+    - **Reactions:**
+        - Rust-based EDSL has some nice type checking features; mainly handy because I already know rust.
+    - **Next Steps:**
+        - Implement a new Sapio contract and get feedback at the workshop.
+- **2021-08-02** [EIP-3675: Upgrade consensus to Proof-of-Stake](https://eips.ethereum.org/EIPS/eip-3675)
+    - **Why?** Learn what the most well-known in-production PoW→PoS transition design looks like.
+    - **Epistemic Status:** Just started.
+    - **Reactions:**
+        - ...
+    - **Next Steps:**
+        - Read it.
+- **2021-08-02** [Ethereum Serenity Handbook](https://notes.ethereum.org/@serenity/handbook)
+    - **Why?** To learn about ETH2 PoS design and especially the transition plan.
+    - **Epistemic Status:**
+        - [How and when to merge eth1 chain into eth2](https://notes.ethereum.org/@serenity/handbook#How-and-when-to-merge-eth1-chain-into-eth2)
+            - [ethresear.ch: The eth1 -> eth2 transition](https://ethresear.ch/t/the-eth1-eth2-transition/6265) - Paused this a few paragraphs in after realizing it may be dated. Move on to:
+        - [Ethereum.org: Beacon Chain](https://ethereum.org/en/eth2/beacon-chain/)
+            - [The Merge](https://ethereum.org/en/eth2/merge/) - pretty light; presumably for casual users.
+        - Finally found [EIP-3675](https://eips.ethereum.org/EIPS/eip-3675) after [asking loudly](https://twitter.com/least_nathan/status/1422316994888560648). Deserves its own top-level entry.
+    - **Reactions:**
+        - This stuff is out of date and aimed at users rather than protocol / wallet devs.
+    - **Next Steps:**
+        - Find specs for protocol / wallet devs. Done: see entry immediately above.
+- **2021-07-28** [Unchained: MIT’s Neha Narula on Why Building DeFi on Bitcoin Is a Great Idea](https://unchainedpodcast.com/mits-neha-narula-on-why-building-defi-on-bitcoin-is-a-great-idea/)
+    - **Why?** Bitcoin is big, yet Defi is the future. How do they intersect?
+    - **Epistemic Status:** Single listen.
+    - **Reactions:**
+        - Neha is very eloquent. Best description of fixed block size case I've ever heard.
+        - Neha is correctly very focused on security and longevity.
+        - Neha embraces all forms of digital curency which obviously includes BTC, a sign to me of solid reasoning about the space. DCI sponsorship of BTC core dev is excellent public service.
+    - **Next Steps:** none.
+- 2021-07-27 [Uncommon Core: Interview with a Searcher - with MEV Senpai and Hasu](https://anchor.fm/uncommoncore/episodes/Interview-with-a-Searcher---with-MEV-Senpai-and-Hasu-e14n9nq)
+    - **Why?** MEV resistance is a key target proprty for blockchains as they add programmability. In Zcash with the introduction of ZSAs we're approaching MEV-related territory.
+    - **Epistemic Status:** Single listen-through, no note taking.
+    - **Reaction:**
+        - [My initial twitter top-level reaction thread](https://twitter.com/least_nathan/status/1420450941526966273)
+    - **Next Steps:** do a second pass with note taking.
+
+## Older / pre-log backfill
+
+- [penumbra design](https://penumbra.zone)
+    - **Why?** Privacy-focused PoS; 
+    Zone; private DEX.
+    - **Epistemic Status:** S2.2 and S2.6
+    - **Next Steps:** Read S2.9 ZSwap. From convo w/ H. de Valence, ZSwap requires a two step process for trades, but I suspect this can be made a single step w/ strong privacy at the expense of more circuit complexity.
