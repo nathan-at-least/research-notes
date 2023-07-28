@@ -1,0 +1,10 @@
+[book]
+authors = ["Nate Wilcox"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Nate's Research Notes"
+
+[build]
+# Follow gh pages convention; see https://nathan-at-least.github.io/auto-deploy-howto.html
+build-dir = "./docs"
